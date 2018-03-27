@@ -1,0 +1,45 @@
+node
+[
+  Thiago
+]
+node
+[
+  Veras
+]
+node
+[
+  Machado
+]
+node
+[
+  Vitor
+]
+node
+[
+  Dullens
+]
+edge
+[
+  source Thiago
+  target Vitor
+]
+edge
+[
+  source Veras
+  target Machado
+]
+edge
+[
+  source Dullens
+  target Thiago
+]
+edge
+[
+  source Machado	
+  target Dullens
+]
+edge
+[
+  source Thiago
+  target Verass
+]
