@@ -14,4 +14,4 @@
 
 4 - O programa irá criar um arquivo chamado out.html que serve para visualizar o grafo
 
-![](img/out.png)
+![](img/outp.png)
