@@ -98,18 +98,26 @@ void clique(){
 	// Mostra o maior clique maximal
 	printf("Clique Maximo\n");
 	printf("Tamanho: %d\n", (int)cliques[0].size());
-	for(auto x : cliques[0])
-		cout << node[x] << endl;
-	
+	for(int i = 0; i < cliques[0].size(); i++){
+		if(i)
+			printf(" -> ");
+		
+		cout << node[cliques[0][i]];
+	}
+	puts("");
 
 	printf("------------------------------------------------------------------------\n");
-	printf("\n");
+	puts("");
 
 	// Mostra um outro clique maximal, de tamanho menor ou igual ao primeiro
 	printf("Clique maximal\n");
 	printf("Tamanho: %d\n",(int)cliques[1].size());
-	for(auto x : cliques[1])
-		cout << node[x] << endl;
+	for(int i = 0; i < cliques[1].size(); i++){
+		if(i)
+			printf(" -> ");
+		cout << node[cliques[1][i]];
+	}
+	puts("");
 }
 
 void all_cliques(){
