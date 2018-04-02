@@ -6,12 +6,12 @@
 
 2 - Executar no terminal ./trab1
 
-![](trab1.png)
+![](img/trab1.png)
 
 3 - Escolher o arquivo gml que o grafo está estruturado. Nesta pasta já possui 3 arquivos exemplo : friends, friends2 e karate.
 
-![](exemple.png)
+![](img/exemple.png)
 
 4 - O programa irá criar um arquivo chamado out.html que serve para visualizar o grafo
 
-![](out.png)
+![](img/out.png)
