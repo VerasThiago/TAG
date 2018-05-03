@@ -75,39 +75,42 @@ void topologicalSort1(vector<vector<int>>&grafo, int n){
 }
 
 void topologicalSort2(vector<vector<int>>&grafo, int n){
-	
+	// Variaveis para armazenar os nós, gerar a resposta e criar o vetor de incidencia
     queue<int> fila;
     vector<int> resp;
     vector<int> incidencia(n,0);
-
 
     // Gerando a lista de incidencia
     for(int i = 0; i < n; i++)
     	for(auto v: grafo[i])
     		incidencia[v]++;
     
-    // initial nodes
+    // Percorrendo os nós que não tem niguém ligado a nele 
     for(int i = 0; i < n; i++)
         if(!incidencia[i])
             fila.push(i);
-        
     
-    
-    // main loop
+    // Loop Principal
     while(!fila.empty()){
-        int el = fila.front(); fila.pop();
-        // add to sequence
-        resp.push_back(el);
 
-        // passeia pelas adjacencias de el
-        for(auto v : grafo[el]){
-            incidencia[v]--;    // diminui em 1
-            if(incidencia[v] == 0){
+        int u = fila.front(); fila.pop();
+        
+        // Colocando no vetor de resposta
+        resp.push_back(u);
+
+        // Caminha pelos filhos de u
+        for(auto v : grafo[u]){
+
+        	// Diminui a incidencia em 1
+        	incidencia[v]--;
+
+        	// Se nao possuir ninguém 
+            if(!incidencia[v])
                 fila.push(v);
-            }
         }
     }
-    
+
+    // Imprimindo a resposta  
     for(auto x: resp) cout << x << " ";printf("\n");
 }
 
