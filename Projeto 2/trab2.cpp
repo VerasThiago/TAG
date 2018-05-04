@@ -4,7 +4,36 @@
 using namespace std;
 
 
+// Print menu on terminal
+void intro(){ 
+
+		printf("\n");
+		printf("#############################################\n");
+		printf("#                                           #\n");
+		printf("#              TOPOLOGICAL SORT             #\n");
+		printf("#                                           #\n");
+		printf("#############################################\n");
+		printf("#                                           #\n");
+		printf("#        Aluno: Thiago Veras Machado        #\n");
+		printf("#              M: 16/0146682                #\n");
+		printf("#                                           #\n");
+		printf("#############################################\n");
+		printf("#                                           #\n");
+		printf("#    Apenas o arquivo huge consegue         #\n");
+		printf("#    demorar mais que 0 segundos.           #\n");
+		printf("#                                           #\n");
+		printf("#    OBS: Apagar a função que imprime os    #\n");
+		printf("#    vertices para conseguir vizualizar o   #\n");
+		printf("#    o tempo demorado do arquivo huge.      #\n");
+		printf("#                                           #\n");
+		printf("#############################################\n");
+
+		printf("\n");
+}
+
+// Função que cria o grafo e armazena as ligações
 vector<vector<int>> create(int *n){
+
 	// Variáveis para pegar o nome, acessar e ler os dados do arquivo
 	string nome;
 	ifstream arquivo;
@@ -15,7 +44,7 @@ vector<vector<int>> create(int *n){
 	
 	// Lendo o nome do arquivo
 	cin >> nome;
-
+	
 	// Abrindo o arquivo
 	arquivo.open(nome);
 
@@ -29,21 +58,23 @@ vector<vector<int>> create(int *n){
 	vector<vector<int>> grafo(*n);
 
 	// Lendo os pontos do arquivo e armazenando no grafo
-	while(arquivo >> x >> y)grafo[x].push_back(y);
+	while(arquivo >> x >> y)
+		grafo[x].push_back(y);
 
 	// Retornando o grafo criado
 	return grafo;
 }
 
 // Função recursiva usada pela ordenação topológica 1
-void topologicalSortUtil(vector<vector<int>> &grafo, int v, int *visited, stack<int> &pilha){
+void ordenacao_Recursiva(vector<vector<int>> &grafo, int v, int *visited, stack<int> &pilha){
+
 	// Marca o nó como visitado
     visited[v] = true;
 
     // Percorre todos os seus filhos e caso não foram visitados, chamar recursivamente a função
     for(auto u : grafo[v])
     	if(!visited[u])
-    		topologicalSortUtil(grafo, u, visited, pilha);
+    		ordenacao_Recursiva(grafo, u, visited, pilha);
 
   	// Empliha o vértice na pilha que armazena o rsultado
     pilha.push(v);
@@ -51,7 +82,8 @@ void topologicalSortUtil(vector<vector<int>> &grafo, int v, int *visited, stack<
 
 
 // Ordenação topológica 1 que chama uma função recursiva
-void topologicalSort1(vector<vector<int>>&grafo, int n){
+vector<int> ordenacao_Topologica1(vector<vector<int>>&grafo, int n){
+
     // Pilha que armazena o resultado
     stack<int> pilha;
 
@@ -64,20 +96,22 @@ void topologicalSort1(vector<vector<int>>&grafo, int n){
     // Percorre todos os vértices e caso não tenha sido visitado, ordenar usando a função recursiva
     for (int i = 0; i < n; i++)
       if (!visited[i])
-        topologicalSortUtil(grafo, i, visited, pilha);
+        ordenacao_Recursiva(grafo, i, visited, pilha);
 
-    // Imprimindo o grafo ordenado topologicamente
-    while(!pilha.empty()){
-        cout << pilha.top() << " ";
-        pilha.pop();
-    }
-    cout << endl;
+    // Montando a resposta no vetor com o grafo ordenado topologicamente
+    vector<int> resposta;
+    while(!pilha.empty())
+        resposta.push_back(pilha.top()),pilha.pop();
+    
+    return resposta;
 }
 
-void topologicalSort2(vector<vector<int>>&grafo, int n){
+// Ordenação topológica 2 que utiliza uma fila
+vector<int> ordenacao_Topologica2(vector<vector<int>>&grafo, int n){
+
 	// Variaveis para armazenar os nós, gerar a resposta e criar o vetor de incidencia
     queue<int> fila;
-    vector<int> resp;
+    vector<int> resposta;
     vector<int> incidencia(n,0);
 
     // Gerando a lista de incidencia
@@ -96,7 +130,7 @@ void topologicalSort2(vector<vector<int>>&grafo, int n){
         int u = fila.front(); fila.pop();
         
         // Colocando no vetor de resposta
-        resp.push_back(u);
+        resposta.push_back(u);
 
         // Caminha pelos filhos de u
         for(auto v : grafo[u]){
@@ -110,22 +144,68 @@ void topologicalSort2(vector<vector<int>>&grafo, int n){
         }
     }
 
-    // Imprimindo a resposta  
-    for(auto x: resp) cout << x << " ";printf("\n");
+    return resposta;
+}
+
+// Função para imprmir o vetor com os nós ordenados
+void print_vector(vector<int> &ordenado, int tipo){
+
+	// Imprime mensagem para identificar qual foi o algoritmo usado
+	printf("Ordenação topológica %d:",tipo);
+
+	// Imprime os nós ordenados
+	for(auto x: ordenado)
+		printf(" %d", x);
+
+	// Quebra de linha
+	printf("\n\n");
+}
+
+
+void solve(vector<vector<int>> &grafo, int tipo, int n){
+	
+	// Varável para calcular tempo de duração de cada algoritmo
+	clock_t t;
+	
+
+	// Vetor que recebe os vertices ordenados
+	vector<int> ordenacao_Topologica;
+	
+	// Recebendo o clock antes de executar o algoritmo
+	t = clock();
+	
+	// Se for o tipo 0, entao ordenação 1, ordenação 2 caso contrário
+	if(!tipo)
+		ordenacao_Topologica = ordenacao_Topologica1(grafo,n); 
+	else
+		ordenacao_Topologica = ordenacao_Topologica2(grafo,n); 
+
+	// Recebe o clock depois da execução do algoritmo e tira a diferença
+	t = clock() - t;
+
+	// Imprime na tela o tempo de execução do algoritmo
+	cout << "Tempo de execução do algoritmo " << tipo+1 << " : " << t << " Clock Ticks e " << (double)t/CLOCKS_PER_SEC << " segundos" << endl;
+
+	// Imprime os nós ordenados topologicamente
+	print_vector(ordenacao_Topologica,tipo);
 }
 
 int main(){
+	// Monstra menu inicial
+	intro();
+
 	// Variável para pegar o tamanho do grafo
 	int n;
 
-	// Grafo criado de tamanho n já com as ligações feitas
+	// Grafo criado de tamanho estabelecido pelo arquivo e com as ligações feitas
 	vector<vector<int>> grafo = create(&n);
+	
+	// Resolve o problema para o tipo 0
+	solve(grafo,0,n);
 
-	// Ordenação topológica 1
-	topologicalSort1(grafo,n);
-	topologicalSort2(grafo,n);
+	// Resolve o problema para o tipo 1
+	solve(grafo,1,n);
 
-
-
-
+	// Fim do programa
+	return 0;
 }
