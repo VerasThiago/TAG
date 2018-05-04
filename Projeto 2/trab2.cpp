@@ -82,6 +82,8 @@ void ordenacao_Recursiva(vector<vector<int>> &grafo, int v, int *visited, stack<
 
 
 // Ordenação topológica 1 que chama uma função recursiva
+// Complexidade : Apenas uma DFS com uma pilha. Logo sua complexidade é a mesma de uma DFS = O(V+E).
+// Fonte : https://www.geeksforgeeks.org/topological-sorting/
 vector<int> ordenacao_Topologica1(vector<vector<int>>&grafo, int n){
 
     // Pilha que armazena o resultado
@@ -106,7 +108,9 @@ vector<int> ordenacao_Topologica1(vector<vector<int>>&grafo, int n){
     return resposta;
 }
 
-// Ordenação topológica 2 que utiliza uma fila
+// Ordenação topológica 2 que utiliza uma fila (Kahn’s algorithm)
+// Complexidade : O(V+E)
+// Fonte: https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/
 vector<int> ordenacao_Topologica2(vector<vector<int>>&grafo, int n){
 
 	// Variaveis para armazenar os nós, gerar a resposta e criar o vetor de incidencia
