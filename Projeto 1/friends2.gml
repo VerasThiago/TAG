@@ -1,100 +1,144 @@
 node
 [
-  id Thiago
+  id A
 ]
 node
 [
-  id Vitor
+  id B
 ]
 node
 [
-  id Gabriel
+  id C
 ]
 node
 [
-  id Giovanni
+  id D
 ]
 node
 [
-  id Andre
+  id E
 node
 [
-  id Fernando
-]
-node
-[
-  id Matheus
+  id F
 ]
 node
 [
-  id Eduardo
+  id G
+]
+node
+[
+  id H
+]
+node
+[
+  id I
 ]
 edge
 [
-  source Thiago
-  target Giovanni
+  source A
+  target B
 ]
 edge
 [
-  source Thiago
-  target Vitor
+  source A
+  target C
 ]
 edge
 [
-  source Thiago
-  target Gabriel
+  source B
+  target H
 ]
 edge
 [
-  source Vitor
-  target Gabriel
+  source B
+  target D
 ]
 edge
 [
-  source Vitor
-  target Giovanni
+  source B
+  target E
 ]
 edge
 [
-  source Gabriel
-  target Giovanni
+  source C
+  target F
 ]
 edge
 [
-  source Vitor
-  target Andre
+  source C
+  target G
 edge
 [
-  source Giovanni
-  target Andre
+  source C
+  target I
 edge
 [
-  source Giovanni
-  target Fernando
+  source D
+  target E
 ]
 edge
 [
-  source Andre
-  target Matheus
+  source D
+  target H
 ]
 edge
 [
-  source Thiago
-  target Eduardo
+  source D
+  target I
 ]
 edge
 [
-  source Vitor
-  target Eduardo
+  source D
+  target F
 ]
 edge
 [
-  source Gabriel
-  target Eduardo
+  source E
+  target H
 ]
 edge
 [
-  source Giovanni
-  target Eduardo
+  source E
+  target I
+]
+edge
+[
+  source E
+  target G
 ]
 
+edge
+[
+  source F
+  target I
+]
+
+edge
+[
+  source F
+  target H
+]
+
+edge
+[
+  source F
+  target G
+]
+
+edge
+[
+  source G
+  target H
+]
+
+edge
+[
+  source G
+  target I
+]
+
+edge
+[
+  source H
+  target I
+]

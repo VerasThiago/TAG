@@ -1,3 +1,7 @@
+// Aluno : Thiago Veras Machado
+// Matricula : 16/0146682
+
+
 #include <bits/stdc++.h>
 #include "graphParser.h"
 #include "svg.h"
