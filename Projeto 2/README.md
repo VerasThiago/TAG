@@ -8,7 +8,7 @@
 
 ![](img/trab2.png)
 
-3 - Escolher o arquivo txt que o grafo está estruturado. Nesta pasta já possui 3 arquivos exemplo : top_small.txt, top_med.txt, top_large.txt e top_huge.txt .
+3 - Escolher o arquivo txt que o grafo está estruturado. Nesta pasta já possui 4 arquivos exemplo : top_small.txt, top_med.txt, top_large.txt e top_huge.txt .
 
 ![](img/example.png)
 
@@ -16,7 +16,7 @@
 
 ![](img/outp.png)
 
-5 - OBS: Unico programa que demora mais que 0 segundos é o arquivo top_huge.txt, para ver seu tempo, basta colocar em comentário a linha 194
+5 - OBS: Único programa que demora mais que 0 segundos é o arquivo top_huge.txt, para ver seu tempo, basta colocar em comentário a linha 194
 
 ![](img/comment.png)
 
