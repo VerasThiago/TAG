@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-
+#include "gnu_plot.hpp"
 
 using namespace std;
 
@@ -32,18 +32,12 @@ void intro(){
 }
 
 // Função que cria o grafo e armazena as ligações
-vector<vector<int>> create(int *n){
+vector<vector<int>> create(int *n, string nome){
 
 	// Variáveis para pegar o nome, acessar e ler os dados do arquivo
-	string nome;
 	ifstream arquivo;
 	int x,y;
 
-	// Interação com o usiário
-	printf("Digite o nome do arquivo: ");
-	
-	// Lendo o nome do arquivo
-	cin >> nome;
 	
 	// Abrindo o arquivo
 	arquivo.open(nome);
@@ -166,7 +160,7 @@ void print_vector(vector<int> &ordenado, int tipo){
 }
 
 
-void solve(vector<vector<int>> &grafo, int tipo, int n){
+double solve(vector<vector<int>> &grafo, int tipo, int n){
 	
 	// Varável para calcular tempo de duração de cada algoritmo
 	clock_t t;
@@ -191,24 +185,60 @@ void solve(vector<vector<int>> &grafo, int tipo, int n){
 	cout << "Tempo de execução do algoritmo " << tipo+1 << " : " << t << " Clock Ticks e " << (double)t/CLOCKS_PER_SEC << " segundos" << endl;
 
 	// Imprime os nós ordenados topologicamente
-	print_vector(ordenacao_Topologica,tipo);
+	//print_vector(ordenacao_Topologica,tipo);
+
+	return (double)t/CLOCKS_PER_SEC;
 }
 
+/*void gnuPlot(vector<double> Kahn, vector<double> Dfs, vector<double> sizes){
+    try{
+        Gnuplot g1("lines");
+        g1.set_xlabel("Size of Graphs");
+        g1.set_ylabel("Time in seconds");
+        g1.set_grid();
+        g1.set_style("lines").plot_xy(sizes,Kahn,"Kahn's Algorithm");
+        g1.set_style("lines").plot_xy(sizes, Dfs, "DFS Algorithm");
+        g1.showonscreen(); // window output
+        cout << "                press ENTER to continue ... " << endl;
+        getchar();
+
+    }
+    catch (GnuplotException &ge){
+        cout << ge.what() << endl;
+    }
+}*/
+
 int main(){
+	vector<string> arquivo = {"top_small.txt", "top_med.txt", "top_large.txt", "top_huge.txt"};
+	vector<double> timesIncidenceSort,timesDFSSort;
+
 	// Monstra menu inicial
 	intro();
 
 	// Variável para pegar o tamanho do grafo
 	int n;
 
-	// Grafo criado de tamanho estabelecido pelo arquivo e com as ligações feitas
-	vector<vector<int>> grafo = create(&n);
+	for(auto x : arquivo){
+		// Grafo criado de tamanho estabelecido pelo arquivo e com as ligações feitas
+		vector<vector<int>> grafo = create(&n, x);
 	
-	// Resolve o problema para o tipo 0
-	solve(grafo,0,n);
+		// Resolve o problema para o tipo 0
+		timesIncidenceSort.push_back(solve(grafo,0,n));
 
-	// Resolve o problema para o tipo 1
-	solve(grafo,1,n);
+		// Resolve o problema para o tipo 1
+		timesDFSSort.push_back(solve(grafo,1,n));
+	}
+	puts("timesIncidenceSort");
+	for(auto x: timesIncidenceSort)
+		cout << x << " ";
+	puts("");
+	puts("timesDFSSort");
+	for(auto x: timesDFSSort)
+		cout << x << " ";
+	puts("");
+	
+	//gnuPlot(timesIncidenceSort, timesDFSSort, sizes);
+
 
 	// Fim do programa
 	return 0;
