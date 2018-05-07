@@ -181,33 +181,40 @@ double solve(vector<vector<int>> &grafo, int tipo, int n){
 	// Recebe o clock depois da execução do algoritmo e tira a diferença
 	t = clock() - t;
 
-	// Imprime na tela o tempo de execução do algoritmo
-	cout << "Tempo de execução do algoritmo " << tipo+1 << " : " << t << " Clock Ticks e " << (double)t/CLOCKS_PER_SEC << " segundos" << endl;
-
 	// Imprime os nós ordenados topologicamente
-	//print_vector(ordenacao_Topologica,tipo);
+	print_vector(ordenacao_Topologica,tipo);
 
+	// Retorna o tempo do algoritmo
 	return (double)t/CLOCKS_PER_SEC;
 }
 
+// Imprime na tela o tempo de execução do algoritmo
+void show_time(vector<double> Kahn, vector<double> DFS, vector<double> sizes){
+	for(int i = 0; i < Kahn.size(); i++)
+		cout << "Time Kahn’s algorithm in graph size " << sizes[i]  << " = " << Kahn[i] << "segundos" << endl;
+		
+	for(int i = 0; i < DFS.size(); i++)
+		cout << "Time DFS sort algorithm in graph size " << sizes[i]  << " = " << DFS[i] << "segundos" << endl;
+}
+
 //Cria o gráfico
-*void gnuPlot(vector<double> Kahn, vector<double> Dfs, vector<double> sizes){
+void gnuPlot(vector<double> Kahn, vector<double> Dfs, vector<double> sizes){
     try{
     	// Gerando tabela
-        Gnuplot g1("linhas");
-        g1.set_xlabel("Quantidade de vértices");
+        Gnuplot g1("lines");
+        g1.set_xlabel("Quantidade de vertices");
         g1.set_ylabel("Tempo em segundos");
         g1.set_grid();
 
         //Gerando as linhas no gráfico
-        g1.set_style("linhas").plot_xy(sizes, Dfs, "Algoritmo com DFS");
-        g1.set_style("linhas").plot_xy(sizes,Kahn,"Algoritmo de Kahn");
+        g1.set_style("lines").plot_xy(sizes, Dfs, "Algoritmo com DFS");
+        g1.set_style("lines").plot_xy(sizes,Kahn,"Algoritmo de Kahn");
 
         // Output na tela
         g1.showonscreen();
 
         // Aguarda o usuário digitar qualquer tecla
-        printf("\tAPERTE QUALQUER TECLA PARA CONTINUAR.\n", );
+        printf("\tAPERTE QUALQUER TECLA PARA CONTINUAR.\n");
         getchar();
     }
     catch (GnuplotException &ge){
@@ -242,6 +249,9 @@ int main(){
 		// Insere o tamanho do grafo
 		sizes.push_back(n);
 	}
+	
+	// Mostra o tempo de cada algoritmo com cada arquivo;
+	show_time(Kahn, DFS, sizes);
 	
 	//Gera o gráfico
 	gnuPlot(Kahn, DFS, sizes);
