@@ -21,6 +21,22 @@ mostrando o grafo montado é um ponto adicional (i.e. 11, caso alguém queira fa
 programa deve encontrar e imprimir um (1) clique maximal (com no mínimo 5 alunos), e um (1) clique
 máximo desse grafo, ambos diferentes, (pelos nomes de todos).
 
-O código deve ser bem documentado, de forma modular com funções para cada tarefa independente,
-realizado por dois (2) estudantes do curso usando “pair programming”, e entregue via sistema
-http://aprender.unb.br do curso, no prazo estipulado.
+
+
+## [Projeto 2](Projeto%202)
+
+Universidade de Brasília 
+Departamento de Ciência da Computação 
+Projeto 2
+Teoria e Aplicação de Grafos, Turma A, 1/2018
+Prof. Díbio
+
+São fornecidos 4 arquivos (top_datasets.zip), contendo 4 grafos com números de vértices de 10, 100,
+10.000,   100.000,   listando   como   pares   de   números   inteiros   por   linha   o   vértice,   e   seu   respectivo
+adjacente.  Essas adjacências são todas consideradas direcionadas (i.e. são dígrafos).  Implemente dois
+(2)   diferentes   algoritmos   de   ordenação   topológica   (ps.   Indique   explicitamente   com   citação   de   fonte
+quais   algoritmos   e   separe-os   em   funções   diferentes),   execute-os   nos   4   dígrafos,   imprima   na   tela   as
+maiores ordenações atingidas em cada grafo, e gráficos de execução temporal (x(tempo):y(nós)) para os
+2 algoritmos. Indique em quais circunstâncias (i.e. dos 4 tamanhos) a escolha de algoritmo a ser feita,
+imprimindo na tela essas opções justificadas pelos gráficos.
+
