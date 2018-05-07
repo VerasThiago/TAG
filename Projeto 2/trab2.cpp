@@ -190,27 +190,38 @@ double solve(vector<vector<int>> &grafo, int tipo, int n){
 	return (double)t/CLOCKS_PER_SEC;
 }
 
-/*void gnuPlot(vector<double> Kahn, vector<double> Dfs, vector<double> sizes){
+//Cria o gráfico
+*void gnuPlot(vector<double> Kahn, vector<double> Dfs, vector<double> sizes){
     try{
-        Gnuplot g1("lines");
-        g1.set_xlabel("Size of Graphs");
-        g1.set_ylabel("Time in seconds");
+    	// Gerando tabela
+        Gnuplot g1("linhas");
+        g1.set_xlabel("Quantidade de vértices");
+        g1.set_ylabel("Tempo em segundos");
         g1.set_grid();
-        g1.set_style("lines").plot_xy(sizes,Kahn,"Kahn's Algorithm");
-        g1.set_style("lines").plot_xy(sizes, Dfs, "DFS Algorithm");
-        g1.showonscreen(); // window output
-        cout << "                press ENTER to continue ... " << endl;
-        getchar();
 
+        //Gerando as linhas no gráfico
+        g1.set_style("linhas").plot_xy(sizes, Dfs, "Algoritmo com DFS");
+        g1.set_style("linhas").plot_xy(sizes,Kahn,"Algoritmo de Kahn");
+
+        // Output na tela
+        g1.showonscreen();
+
+        // Aguarda o usuário digitar qualquer tecla
+        printf("\tAPERTE QUALQUER TECLA PARA CONTINUAR.\n", );
+        getchar();
     }
     catch (GnuplotException &ge){
         cout << ge.what() << endl;
     }
-}*/
+}
 
 int main(){
+
+	// Vetor que possui o nome dos arquivos
 	vector<string> arquivo = {"top_small.txt", "top_med.txt", "top_large.txt", "top_huge.txt"};
-	vector<double> timesIncidenceSort,timesDFSSort;
+
+	// Vetores que possuem o  tempo dos algoritmos e tamanho dos grafos
+	vector<double> Kahn,DFS,sizes;
 
 	// Monstra menu inicial
 	intro();
@@ -223,22 +234,17 @@ int main(){
 		vector<vector<int>> grafo = create(&n, x);
 	
 		// Resolve o problema para o tipo 0
-		timesIncidenceSort.push_back(solve(grafo,0,n));
+		Kahn.push_back(solve(grafo,0,n));
 
 		// Resolve o problema para o tipo 1
-		timesDFSSort.push_back(solve(grafo,1,n));
-	}
-	puts("timesIncidenceSort");
-	for(auto x: timesIncidenceSort)
-		cout << x << " ";
-	puts("");
-	puts("timesDFSSort");
-	for(auto x: timesDFSSort)
-		cout << x << " ";
-	puts("");
-	
-	//gnuPlot(timesIncidenceSort, timesDFSSort, sizes);
+		DFS.push_back(solve(grafo,1,n));
 
+		// Insere o tamanho do grafo
+		sizes.push_back(n);
+	}
+	
+	//Gera o gráfico
+	gnuPlot(Kahn, DFS, sizes);
 
 	// Fim do programa
 	return 0;
