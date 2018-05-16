@@ -40,3 +40,16 @@ maiores ordenações atingidas em cada grafo, e gráficos de execução temporal
 2 algoritmos. Indique em quais circunstâncias (i.e. dos 4 tamanhos) a escolha de algoritmo a ser feita,
 imprimindo na tela essas opções justificadas pelos gráficos.
 
+## [Projeto 3](Projeto%203)
+
+Universidade de Brasília 
+Departamento de Ciência da Computação 
+Projeto 2
+Teoria e Aplicação de Grafos, Turma A, 1/2018
+Prof. Díbio
+
+Considere   para   efeito   deste   projeto   que   uma   determinada   unidade   da   federação   fez   um   concurso   e foram aprovados cem (100) novos professores para escolas públicas. Cada professor aprovado possui uma (1), duas (2), ou até (3) habilitações de conteúdos em que pode atuar. Cinquenta (50) escolas se habilitaram   a   receber   novos   professores,   sendo que   algumas   poderão   receber   no   máximo   um   (1) professor,   e   outras   no   máximo   dois   (2)   professores.   As   escolas   podem   indicar   preferências   de professores  indicando se 3, 2 ou 1 habilitação os candidatos devem ter. Por sua vez, cada professor pode escolher   uma   ordem   de   cinco   (5)   escolas   onde   gostaria   de   atuar.   Neste    rojeto   você(s)   deve(m) implementar   um   algoritmo   que   realize   um   emparelhamento   máximo   entre   os   dois   conjuntos,   com preferências, e forneça uma solução estável. O  lgoritmo pode ser ótimo para os professores, ou ótimo do ponto de vista das escolas. As soluções dadas em (Abraham, Irving & Manlove, 2007) são úteis e qualquer uma pode ser implementada com  ariações pertinentes. Um arquivo entradaProj3TAG.txt com as indicações de código do professor, habilitações e preferências de escolas, bem como das escolas com suas  preferências  em termos   e  habilitações  dos  professores  é fornecido como  entrada.  Uma  versão pública do artigo de  (Abraham, Irving & Manlove, 2007) é fornecida para leitura.
+
+Abraham,   D.J.   and   Irving,    .W.   and   Manlove,   D.F.   (2007).   Two   algorithms   for   the   student-project allocation problem.  Journal of Discrete Algorithms  5(1):pp. 73-90.
+
+O código deve ser bem documentado,  e forma modular com funções para cada tarefa independente, realizado   por   dois   (2)   estudantes   do   curso   usando   “pair programming”,  e entregue via sistema http://prender.unb.br do curso, no prazo estipulado. 
