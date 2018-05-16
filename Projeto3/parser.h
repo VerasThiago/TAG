@@ -17,16 +17,37 @@ void show(){
 		cout << "Escola " << i << " : " << escolas[i].first << " " << escolas[i].second << endl;
 }
 
-const vector<string> explode(const string& s, const char& c){
+
+// Faz o split da string de acordo com o parametro passado pelo char c
+const vector<string> split(const string& s, const char& c){
+
+	// String base
 	string buff{""};
+
+	// Vetor que irá salvar os splits
 	vector<string> v;
 	
+	// Andando por cada carcter
 	for(auto n:s){
-		if(n != c) buff+=n; else
-		if(n == c && buff != "") { v.push_back(buff); buff = ""; }
+
+		// Se nao for o char de quebra
+		if(n != c)
+			buff += n; 
+
+		// Char que deve ser quabrado, logo adicionar a string ao vetor
+		else (n == c && buff != ""){
+			// Adicionando no vetor
+			v.push_back(buff);
+
+			// Resetando a string buff
+			buff = "";
+		}
 	}
-	if(buff != "") v.push_back(buff);
+	// Fazendo a ultima adição após o char de quebra
+	if(buff != "")
+		v.push_back(buff);
 	
+	// Retornando o vetor com os splits
 	return v;
 }
 
@@ -34,7 +55,7 @@ const vector<string> explode(const string& s, const char& c){
 // Função que cria o grafo e armazena as ligações
 void  read(string nome){
 
-	// Variáveis para pegar o nome, acessar e ler os dados do arquivo
+	// Variáveis para acessar e ler os dados do arquivo
 	ifstream arquivo; string line;
 
 	// Abrindo o arquivo
@@ -43,47 +64,84 @@ void  read(string nome){
 	// Se não conseguir abrir o arquivo, imprimir a mensagem de falha e encerrar o programa
 	if(!arquivo) cout << "Falha ao abrir o arquivo " << nome << endl, exit(EXIT_FAILURE);
 
+	// Ignorando as 3 primeiras linhas
 	for(int i = 0; i < 3; i++)
 		getline(arquivo,line);
 
 
 	while(arquivo >> line, line[0] == '('){
+			// Removendo os 2 primeiros e os 2 ultimos caracteres
 			line = line.substr(2, line.size() - 3);
-			cout << line << " ";
-			int pai = stoi(line);
 
-			for(int i = 0; i < 6; i++){
-				string line;
+			// Pegando o numero do professor
+			int professor = stoi(line);
+
+			// Iterando pelos 6 dados de cada linha
+			for(int i = 0; i < 6; i++){]
+
+				// Lendo uma string do arquivo
 				arquivo >> line;
+
+				// Verificando qual bloco lido se encontra
 				switch(i){
 					case 0:
+
+						// Removendo o ultimo caracter
 						line = line.substr(0, line.size() - 2);
-			    		habilitacoes[pai] = stoi(line);
+
+						// Adicionando a quantidade de habilitações do professor
+			    		habilitacoes[professor] = stoi(line);
+
 			    		break;
+
 			    	case 1:
+
+			    		// Removendo os 2 primeiros e os 2 ultimos caractere
 			    		line = line.substr(2, line.size() - 3);
-			    		grafo[pai].push_back(stoi(line));
+
+			    		// Adicionando a escola de preferência do professor
+			    		grafo[professor].push_back(stoi(line));
+
 			    		break;
+
 			    	default:
+
+			    		// Removendo o pirmeiro e o ultimo caracter
 			    		line = line.substr(1, line.size() - 2);
-			    		grafo[pai].push_back(stoi(line));
+
+			    		// Adicionando a escola de preferência do professor
+			    		grafo[professor].push_back(stoi(line));
+
+
 			    		break;
 				}
-
-				cout << line << " ";
 			}
-			puts("");
 	}
-	getline(arquivo,line);
-	getline(arquivo,line);
 
+	// Ignorando as 2 primeiras linhas
+	for(int i = 0; i < 2; i++)
+		getline(arquivo,line);
+
+	// Lendo as preferencias de cada escola
 	while(arquivo >> line){
-			vector<string> v{explode(line, ':')};
-			string escola = v[0].substr(2, v[0].size() - 2);
-			string hab = v[1].substr(1,v[1].size()-2);
-			string vagas = v[2].substr(1,v[2].size()-2);
-			escolas[stoi(escola)] = make_pair(stoi(hab),stoi(vagas));
+
+		// Dando split no input do arquivo, seprando em escola, habilitação e quantidade de vagas	
+		vector<string> v{split(line, ':')};
+
+		// Pegando o numero da escola
+		string escola = v[0].substr(2, v[0].size() - 2);
+
+		// Pegando a habilitação
+		string hab = v[1].substr(1,v[1].size()-2);
+
+		// Pegando a quantidade de vagas
+		string vagas = v[2].substr(1,v[2].size()-2);
+
+		// Salvando os dados na respectiva escola
+		escolas[stoi(escola)] = make_pair(stoi(hab),stoi(vagas));
 	}
+
+	// Apenas mostrando tudo para debugar.
 	show();
 
 
