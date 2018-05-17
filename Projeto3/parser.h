@@ -35,7 +35,7 @@ const vector<string> split(const string& s, const char& c){
 			buff += n; 
 
 		// Char que deve ser quabrado, logo adicionar a string ao vetor
-		else (n == c && buff != ""){
+		else if (n == c && buff != ""){
 			// Adicionando no vetor
 			v.push_back(buff);
 
@@ -77,7 +77,7 @@ void  read(string nome){
 			int professor = stoi(line);
 
 			// Iterando pelos 6 dados de cada linha
-			for(int i = 0; i < 6; i++){]
+			for(int i = 0; i < 6; i++){
 
 				// Lendo uma string do arquivo
 				arquivo >> line;
