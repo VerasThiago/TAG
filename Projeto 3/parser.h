@@ -1,20 +1,76 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-vector<int> grafo[1000];
-vector<int> habilitacoes(1000,0);
-vector<pair<int,int>> escolas(1000);
+
+struct Professor;
+
+
+struct Escola{
+
+	int code;
+
+	int pref;
+
+	int jobs;
+
+	vector<Professor*> match;
+
+	Escola(int code, int pref, int jobs){
+		this->code = code;
+        this->pref = pref;
+        this->jobs = jobs;
+        this->match.clear();
+	}
+
+	int free(){
+		return jobs - match.size();
+	}
+};
+
+struct Professor {
+
+    int code;
+
+    int hab;
+
+   	vector<int> pref;
+
+   	bool matched;
+   	
+   	Escola* match;
+ 
+    Professor(int code, int hab, vector<int> pref){
+        this->code = code;
+        this->hab = hab;
+        this->pref = pref;
+        this->matched = true;
+        this->match = NULL;
+    }
+
+
+    bool free(){
+        return matched;
+    }
+
+  
+};
+
+
+vector<Professor*> prof;
+vector<Escola*> esc;
+
 
 void show(){
-	for(int i = 1; i <= 100; i++){
-		cout << "hab de " << i << " = " << habilitacoes[i] << " : ";
-		for(auto x: grafo[i])
-			cout << "E" << x << " ";
-		
+	puts("Andando pelps professores");
+	for(auto x: prof){
+		cout << "hab de " << x->code << " = " << x->hab << " : ";
+		for(auto y : x->pref) cout << y << " ";
 		puts("");
 	}
-	for(int i = 1; i <= 50; i++)
-		cout << "Escola " << i << " : " << escolas[i].first << " " << escolas[i].second << endl;
+
+	puts("Andando pelas escolas");
+	for(auto x: esc)
+		cout << "escola " << x->code << " prefere " << x->pref << " e tem " << x->jobs << " vagas " << endl;
 }
 
 
@@ -76,6 +132,9 @@ void  read(string nome){
 			// Pegando o numero do professor
 			int professor = stoi(line);
 
+			int hab;
+
+			vector<int> pref;
 			// Iterando pelos 6 dados de cada linha
 			for(int i = 0; i < 6; i++){
 
@@ -90,7 +149,7 @@ void  read(string nome){
 						line = line.substr(0, line.size() - 2);
 
 						// Adicionando a quantidade de habilitações do professor
-			    		habilitacoes[professor] = stoi(line);
+			    		hab = stoi(line);
 
 			    		break;
 
@@ -100,7 +159,7 @@ void  read(string nome){
 			    		line = line.substr(2, line.size() - 3);
 
 			    		// Adicionando a escola de preferência do professor
-			    		grafo[professor].push_back(stoi(line));
+			    		pref.push_back(stoi(line));
 
 			    		break;
 
@@ -110,12 +169,15 @@ void  read(string nome){
 			    		line = line.substr(1, line.size() - 2);
 
 			    		// Adicionando a escola de preferência do professor
-			    		grafo[professor].push_back(stoi(line));
+			    		pref.push_back(stoi(line));
 
 
 			    		break;
 				}
 			}
+
+			Professor* p = new Professor(professor, hab, pref);
+			prof.push_back(p);
 	}
 
 	// Ignorando as 2 primeiras linhas
@@ -138,11 +200,12 @@ void  read(string nome){
 		string vagas = v[2].substr(1,v[2].size()-2);
 
 		// Salvando os dados na respectiva escola
-		escolas[stoi(escola)] = make_pair(stoi(hab),stoi(vagas));
+		Escola* e = new Escola(stoi(escola),stoi(hab),stoi(vagas));
+		esc.push_back(e);
 	}
 
 	// Apenas mostrando tudo para debugar.
-	show();
+	//show();
 
 
 }
