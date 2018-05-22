@@ -1,20 +1,26 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 struct Professor;
 
-
+// Struct que representa uma escola
 struct Escola{
 
+	// Código da escola
 	int code;
 
+	// Quatidade de habilidades da preferencia da escola
 	int pref;
 
+
+	// Quantidade de vagas
 	int jobs;
 
+	// Professores ligados a escola	
 	vector<Professor*> match;
 
+	// Construtor da escola
 	Escola(int code, int pref, int jobs){
 		this->code = code;
         this->pref = pref;
@@ -22,23 +28,33 @@ struct Escola{
         this->match.clear();
 	}
 
+	// Método que retorna a quantidade de vagas disponíveis
 	int free(){
 		return jobs - match.size();
 	}
+
 };
 
+
+// Struct que representa um professor
 struct Professor {
 
+	// Código do professor
     int code;
 
+    // Quantidade de habilidades que possui
     int hab;
 
+    // Lista de códigos das escolas de sua preferencia
    	vector<int> pref;
 
+   	// Variável booleana para saber se o professor está livre
    	bool matched;
    	
+   	// Escola que o professor está ligado
    	Escola* match;
- 
+	
+	// Construtor do professor 
     Professor(int code, int hab, vector<int> pref){
         this->code = code;
         this->hab = hab;
@@ -47,7 +63,7 @@ struct Professor {
         this->match = NULL;
     }
 
-
+    // Método para saber se o professor está livre
     bool free(){
         return matched;
     }
@@ -55,11 +71,14 @@ struct Professor {
   
 };
 
-
+// Lista de professores
 vector<Professor*> prof;
+
+// Lista de escolas
 vector<Escola*> esc;
 
 
+// Mostra os dados das listas, apenas para debugar
 void show(){
 	puts("Andando pelps professores");
 	for(auto x: prof){
