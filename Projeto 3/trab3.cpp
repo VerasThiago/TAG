@@ -10,7 +10,7 @@ void assign_Free(Professor* p, Escola* e){
 	// Vincula a escola ao match do professor
 	p->match = e;
 
-	// Muda sua disponibilidade para falso
+	// Muda sua disponibilidade para falso pois agora ele está vinculado a uma escola
 	p->matched = false;
 
 	// Vicula o professor a escola
@@ -30,13 +30,13 @@ Professor* assign_Full(Professor* p, Escola* e){
 		// Se a quantidade de habilidades do professor for diferente da preferencia da escola, então ele deve ser removido
 		if(e->match[i]->hab != e->pref){
 
-			// Remove o vinculo do professor com a escola
+			// Remove o vinculo do professor com a escola pois ele será substituido 
 			e->match[i]->match = NULL;
 
-			// Muda para verdadeiro sua disponibilidade
+			// Muda para verdadeiro sua disponibilidade pois agora está sem escola
 			e->match[i]->matched = true;
 
-			// Atribui ao retorno o professor removido da escola
+			// Atribui ao retorno o professor removido da escola pois deverá voltar para fila
 			retorno = e->match[i];
 
 			// Remove da lista de professores associados a escola
@@ -47,7 +47,7 @@ Professor* assign_Full(Professor* p, Escola* e){
 		}
 	}
 
-	// Como a escola liverou um professor, agora podemos chamar a função que vincula um professor a uma escola com vaga
+	// Como a escola liberou um professor, agora podemos chamar a função que vincula um professor a uma escola com vaga
 	assign_Free(p,e);
 
 	// Retorna o professor removido
@@ -77,6 +77,8 @@ void emparelhamento_estavel_para_professor	(){
 	
 	// Fila de professores livres
 	queue<Professor*> q;
+
+	// Caminha pelos professores
 	for(auto x : prof){
 
 		// Se o professor está livre, então ele entra na fila
@@ -147,4 +149,5 @@ int main(){
 
 	show_schools();
 
+	return 0;
 }

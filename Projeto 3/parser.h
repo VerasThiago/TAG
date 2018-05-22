@@ -67,7 +67,6 @@ struct Professor {
     bool free(){
         return matched;
     }
-
   
 };
 
@@ -76,7 +75,6 @@ vector<Professor*> prof;
 
 // Lista de escolas
 vector<Escola*> esc;
-
 
 // Mostra os dados das listas, apenas para debugar
 void show(){
@@ -91,7 +89,6 @@ void show(){
 	for(auto x: esc)
 		cout << "escola " << x->code << " prefere " << x->pref << " e tem " << x->jobs << " vagas " << endl;
 }
-
 
 // Faz o split da string de acordo com o parametro passado pelo char c
 const vector<string> split(const string& s, const char& c){
@@ -126,7 +123,6 @@ const vector<string> split(const string& s, const char& c){
 	return v;
 }
 
-
 // Função que cria o grafo e armazena as ligações
 void  read(string nome){
 
@@ -151,9 +147,12 @@ void  read(string nome){
 			// Pegando o numero do professor
 			int professor = stoi(line);
 
+			// Quantidade de habilidade do professor
 			int hab;
 
+			// Códigos das escolas de preferencia do professor
 			vector<int> pref;
+
 			// Iterando pelos 6 dados de cada linha
 			for(int i = 0; i < 6; i++){
 
@@ -195,7 +194,10 @@ void  read(string nome){
 				}
 			}
 
+			// Criando uma estruct do professor
 			Professor* p = new Professor(professor, hab, pref);
+
+			// Inserindo professor na lista de professores
 			prof.push_back(p);
 	}
 
@@ -223,7 +225,7 @@ void  read(string nome){
 		esc.push_back(e);
 	}
 
-	// Apenas mostrando tudo para debugar.
+	// Apenas mostrando tudo para debugar, descomente a função show para conseguir ver.
 	//show();
 
 
